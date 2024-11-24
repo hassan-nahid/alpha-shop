@@ -1,16 +1,21 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {  toast } from "react-toastify";
+import { useUser } from "../provider/userProvider";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const { setUserData } = useUser(); 
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(""); // Clear previous errors
 
     if (!email || !password) {
-      setError("Please fill in all fields.");
+      toast.error("Please fill in all fields.");
       return;
     }
 
@@ -25,15 +30,17 @@ const Login = () => {
 
       const data = await response.json();
       if (!response.ok) {
-        setError(data.error || "Invalid login credentials.");
+        toast.error(data.error || "Invalid login credentials.");
         return;
       }
 
+      localStorage.setItem("token", data.token); // Save the token
+      setUserData(data.user); // Save the user details
+      toast.success("Login successful!");
+      navigate("/")
       console.log("Login successful:", data); 
-      localStorage.setItem("token", data.token); 
-      alert("Login Successful!");
     } catch (err) {
-      setError("Something went wrong. Please try again.");
+      toast.error("Something went wrong. Please try again.");
       console.error("Login error:", err);
     }
   };
@@ -42,11 +49,7 @@ const Login = () => {
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="card w-full max-w-sm bg-white shadow-xl p-6">
         <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
-        {error && (
-          <div className="alert alert-error shadow-lg mb-4">
-            <span>{error}</span>
-          </div>
-        )}
+
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">
@@ -77,7 +80,10 @@ const Login = () => {
             />
           </div>
           <div className="mb-6">
-            <button type="submit" className="btn btn-ghost bg-primary hover:bg-primary text-white border-1 border-white hover:border-1 hover:border-white w-full">
+            <button
+              type="submit"
+              className="btn btn-ghost bg-primary hover:bg-primary text-white border-1 border-white hover:border-1 hover:border-white w-full"
+            >
               Login
             </button>
           </div>
@@ -89,6 +95,7 @@ const Login = () => {
           </a>
         </p>
       </div>
+      
     </div>
   );
 };
