@@ -7,28 +7,46 @@ export const getCart = async (req, res) => {
   const userId = req.user.userId;
 
   try {
+    // Fetch cart items from the database based on the user ID
     const result = await pool.query('SELECT * FROM carts WHERE user_id = $1', [userId]);
 
+    // Check if the query returns results
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: 'No cart items found for this user' });
+    }
+
+    // Map over the cart items and fetch product data for each cart item
     const cartItemsWithProducts = await Promise.all(
       result.rows.map(async (cartItem) => {
-        const productId = cartItem.productId;
+        const productId = cartItem.productid; // Correct the field name to `productid`
+        console.log(cartItem); // Log to inspect the structure of each cart item
+
+        // Handle case where productId is missing or invalid
+        if (!productId) {
+          console.warn(`Skipping cart item with missing productId: ${cartItem.id}`);
+          return { ...cartItem, product: null }; // Return cart item with no product data
+        }
+
         try {
-          // Fetch product data using the external API
+          // Fetch product details from an external API
           const response = await axios.get(`https://dummyjson.com/products/${productId}`);
+          console.log(response.data); // Log the fetched product data
           return {
             ...cartItem,
-            product: response.data // Add product details to cart item
+            product: response.data, // Add product details to cart item
           };
         } catch (err) {
+          // Log and handle any errors while fetching the product
           console.error(`Error fetching product with ID ${productId}:`, err.message);
-          return { ...cartItem, product: null }; // Add null product data if error occurs
+          return { ...cartItem, product: null }; // Return cart item with no product data
         }
       })
     );
 
-    // Send back the cart items along with product details
+    // Respond with the cart items that include product details
     res.json(cartItemsWithProducts);
   } catch (err) {
+    // Handle errors in database query
     console.error("Error fetching cart items:", err.message);
     res.status(500).json({ error: 'Database error' });
   }
@@ -66,7 +84,7 @@ export const updateCart = async (req, res) => {
 
   try {
     await pool.query(
-      'UPDATE carts SET quantity = $1 WHERE user_id = $2 AND product_id = $3',
+      'UPDATE carts SET quantity = $1 WHERE user_id = $2 AND productId = $3',
       [quantity, userId, productId]
     );
     res.json({ message: 'Cart updated' });
@@ -80,7 +98,7 @@ export const deleteFromCart = async (req, res) => {
   const userId = req.user.userId;
 
   try {
-    await pool.query('DELETE FROM carts WHERE user_id = $1 AND product_id = $2', [userId, productId]);
+    await pool.query('DELETE FROM carts WHERE user_id = $1 AND productId = $2', [userId, productId]);
     res.json({ message: 'Product removed from cart' });
   } catch (err) {
     res.status(500).json({ error: 'Database error' });

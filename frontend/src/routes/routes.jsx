@@ -7,11 +7,14 @@ import AllProduct from "../pages/AllProduct";
 import SingleProduct from "../pages/SingleProduct";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
+import Cart from "../pages/Cart";
+import ErrorPage from "../pages/ErrorPage";
 
 export const router = createBrowserRouter([
     {
       path: "/",
       element: <Main/>,
+      errorElement:<ErrorPage/>,
       children: [
         {
             path: "/",
@@ -32,6 +35,10 @@ export const router = createBrowserRouter([
         {
             path: "/signup",
             element: <Signup/>
+        },
+        {
+            path: "/cart",
+            element: <Cart/>
         },
       ]
     },
