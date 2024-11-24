@@ -23,7 +23,7 @@ const LatestProduct = ({ products }) => {
                   <span className="badge badge-info">{product.availabilityStatus}</span>
                 </div>
                 <div className="card-actions justify-end mt-4">
-                  <Link to={`/product/${product.id}`} className="btn btn-ghost bg-primary hover:bg-primary text-white border-1 border-white hover:border-1 hover:border-white">Add to Cart</Link>
+                  <Link to={`/product/${product.id}`} className="btn btn-ghost bg-primary hover:bg-primary text-white border-1 border-white hover:border-1 hover:border-white">Details</Link>
                 </div>
               </div>
             </div>
