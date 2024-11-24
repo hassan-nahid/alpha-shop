@@ -9,6 +9,7 @@ Alpha Shop is an e-commerce application built with a React frontend and an Expre
   - [Backend](#backend)
   - [Frontend](#frontend)
 - [Environment Variables](#environment-variables)
+- [Package.json](#package.json)
 - [Scripts](#scripts)
 - [License](#license)
 
@@ -74,10 +75,11 @@ DB_USER=your_database_user
 DB_PASSWORD=your_database_password
 DB_NAME=your_database_name
 JWT_SECRET=your_jwt_secret
+```
 
 ## Package.json Variables
 
-### Frontend [package.json](http://_vscodecontentref_/2)
+### Frontend [package.json]
 
 ```json
 {
@@ -118,7 +120,7 @@ JWT_SECRET=your_jwt_secret
 }
 
 
-### Backend [package.json](http://_vscodecontentref_/2)
+### Backend [package.json]
 
 ```json
 {
@@ -147,3 +149,20 @@ JWT_SECRET=your_jwt_secret
     "nodemon": "^3.1.7"
   }
 }
+```
+## Scripts
+
+### Backend
+
+- `npm run dev`: Start the backend server with nodemon for development.
+
+### Frontend
+
+- `npm run dev`: Start the frontend development server.
+- `npm run build`: Build the frontend for production.
+- `npm run lint`: Run ESLint to check for linting errors.
+- `npm run preview`: Preview the production build.
+
+## License
+
+This project is licensed under the MIT License.
