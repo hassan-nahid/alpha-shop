@@ -23,7 +23,7 @@ const AllProduct = () => {
       <h1 className="text-4xl font-semibold text-center mb-8 text-primary">All Products</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
         {products.length === 0 ? (
-          <p className="text-center text-lg">No products available</p>
+          <p className="text-center text-lg min-h-screen">No products available</p>
         ) : (
           products.map((product) => (
             <div key={product.id} className="card w-full bg-base-100 shadow-lg">

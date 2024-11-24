@@ -1,12 +1,12 @@
+import { Link } from "react-router-dom"
 
 const Footer = () => {
     return (
-        <div><footer className="footer footer-center bg-base-200 text-base-content rounded p-10">
+        <div><footer className="footer footer-center bg-base-300 text-base-content rounded p-10">
             <nav className="grid grid-flow-col gap-4">
-                <a className="link link-hover">About us</a>
-                <a className="link link-hover">Contact</a>
-                <a className="link link-hover">Jobs</a>
-                <a className="link link-hover">Press kit</a>
+                <Link to={"/home"} className="link link-hover">Home</Link>
+                <Link to={"/products"} className="link link-hover">Products</Link>
+                
             </nav>
             <nav>
                 <div className="grid grid-flow-col gap-4">
@@ -46,7 +46,7 @@ const Footer = () => {
                 </div>
             </nav>
             <aside>
-                <p>Copyright © {new Date().getFullYear()} - All right reserved by ACME Industries Ltd</p>
+                <p>Copyright © {new Date().getFullYear()} - All right reserved by Alpha Shop</p>
             </aside>
         </footer></div>
     )
