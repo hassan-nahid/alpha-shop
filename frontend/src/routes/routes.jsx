@@ -9,6 +9,7 @@ import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import Cart from "../pages/Cart";
 import ErrorPage from "../pages/ErrorPage";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
     {
@@ -38,7 +39,7 @@ export const router = createBrowserRouter([
         },
         {
             path: "/cart",
-            element: <Cart/>
+            element: <PrivateRoute><Cart/></PrivateRoute>
         },
       ]
     },

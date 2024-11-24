@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const LatestProduct = ({ products }) => {
     return (
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
@@ -21,7 +23,7 @@ const LatestProduct = ({ products }) => {
                   <span className="badge badge-info">{product.availabilityStatus}</span>
                 </div>
                 <div className="card-actions justify-end mt-4">
-                  <button className="btn btn-ghost bg-primary hover:bg-primary text-white border-1 border-white hover:border-1 hover:border-white">Add to Cart</button>
+                  <Link to={`/product/${product.id}`} className="btn btn-ghost bg-primary hover:bg-primary text-white border-1 border-white hover:border-1 hover:border-white">Add to Cart</Link>
                 </div>
               </div>
             </div>

@@ -1,10 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../provider/userProvider";
+import { FaShoppingCart } from 'react-icons/fa'; // Import shopping cart icon
 
 const Navbar = () => {
     const navigate = useNavigate();
     const { user, clearUserData } = useUser();
-
+    
 
 
     const handleLogout = () => {
@@ -23,6 +24,11 @@ const Navbar = () => {
             <li>
                 <Link to="/products" className="text-white font-semibold">
                     Products
+                </Link>
+            </li>
+            <li>
+                <Link to="/cart" className="text-white font-semibold">
+                   <FaShoppingCart/> Cart
                 </Link>
             </li>
         </>
@@ -69,7 +75,6 @@ const Navbar = () => {
                             </button>
                             <img className="rounded-full w-12 h-12" title={user?.email} src="/user.jpg" alt="" />
                         </div>
-
                     ) : (
                         <Link
                             to="/login"
@@ -77,6 +82,8 @@ const Navbar = () => {
                             Login
                         </Link>
                     )}
+
+                   
                 </div>
             </div>
         </div>

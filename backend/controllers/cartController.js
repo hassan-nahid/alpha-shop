@@ -10,9 +10,9 @@ export const getCart = async (req, res) => {
     // Fetch cart items from the database based on the user ID
     const result = await pool.query('SELECT * FROM carts WHERE user_id = $1', [userId]);
 
-    // Check if the query returns results
+    // If no cart items are found, return an empty array with a 200 OK response
     if (result.rows.length === 0) {
-      return res.status(404).json({ message: 'No cart items found for this user' });
+      return res.status(200).json([]); // Return empty array instead of 404
     }
 
     // Map over the cart items and fetch product data for each cart item
@@ -51,6 +51,7 @@ export const getCart = async (req, res) => {
     res.status(500).json({ error: 'Database error' });
   }
 };
+
 
 
 export const addToCart = async (req, res) => {
