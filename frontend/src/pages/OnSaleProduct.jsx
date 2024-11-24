@@ -21,7 +21,7 @@ const OnSaleProduct = ({ products }) => {
                   <span className="badge badge-error">{product.discountPercentage}% OFF</span>
                 </div>
                 <div className="card-actions justify-end mt-4">
-                  <button className="btn btn-primary">Add to Cart</button>
+                  <button className="btn btn-ghost bg-primary hover:bg-primary text-white border-1 border-white hover:border-1 hover:border-white">Add to Cart</button>
                 </div>
               </div>
             </div>

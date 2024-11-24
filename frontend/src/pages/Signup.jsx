@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useUser } from "../provider/userProvider";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate()
+  const {user} = useUser()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,6 +48,11 @@ const Signup = () => {
       console.error("Signup error:", err);
     }
   };
+  useEffect(() => {
+    if(user){
+      navigate("/")
+    }
+  }, [user,navigate]);
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">

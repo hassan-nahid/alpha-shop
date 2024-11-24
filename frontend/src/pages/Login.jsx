@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {  toast } from "react-toastify";
 import { useUser } from "../provider/userProvider";
@@ -8,6 +8,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const { setUserData } = useUser(); 
+  const {user} = useUser();
 
 
 
@@ -38,12 +39,17 @@ const Login = () => {
       setUserData(data.user); // Save the user details
       toast.success("Login successful!");
       navigate("/")
-      console.log("Login successful:", data); 
     } catch (err) {
       toast.error("Something went wrong. Please try again.");
       console.error("Login error:", err);
     }
   };
+
+  useEffect(() => {
+    if(user){
+      navigate("/")
+    }
+  }, [user,navigate]);
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
