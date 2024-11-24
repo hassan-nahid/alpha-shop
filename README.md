@@ -9,7 +9,7 @@ Alpha Shop is an e-commerce application built with a React frontend and an Expre
   - [Backend](#backend)
   - [Frontend](#frontend)
 - [Environment Variables](#environment-variables)
-- [Package.json](#package.json)
+- [Package.json](#package-json)
 - [Scripts](#scripts)
 - [License](#license)
 
@@ -118,7 +118,7 @@ JWT_SECRET=your_jwt_secret
     "vite": "^5.4.10"
   }
 }
-
+```
 
 ### Backend [package.json]
 
