@@ -75,6 +75,7 @@ DB_PASSWORD=your_database_password
 DB_NAME=your_database_name
 JWT_SECRET=your_jwt_secret
 
+## Package.json Variables
 
 ### Frontend [package.json](http://_vscodecontentref_/2)
 
