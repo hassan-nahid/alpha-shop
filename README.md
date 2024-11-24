@@ -77,7 +77,7 @@ DB_NAME=your_database_name
 JWT_SECRET=your_jwt_secret
 ```
 
-## Package.json Variables
+## Package json Variables
 
 ### Frontend [package.json]
 
